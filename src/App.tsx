@@ -21,6 +21,9 @@ import {
   subscribeMatches,
   subscribeCommittee,
   subscribeSettings,
+  fetchMatchesFromFirestore,
+  fetchCommitteeFromFirestore,
+  fetchSettingsFromFirestore,
   saveMatchToFirestore,
   deleteMatchFromFirestore,
   saveMatchesToFirestore,
@@ -155,10 +158,47 @@ export default function App() {
 
   // Real-time Firestore synchronization subscription on mount
   useEffect(() => {
-    // Run initialization in the background without blocking subscriptions
-    initializeDatabaseIfEmpty().catch((err) => {
-      console.error("Background DB initialization failed:", err);
-    });
+    let isMounted = true;
+
+    const syncRemoteState = async () => {
+      try {
+        await initializeDatabaseIfEmpty();
+
+        const [remoteMatches, remoteCommittee, remoteSettings] = await Promise.all([
+          fetchMatchesFromFirestore(),
+          fetchCommitteeFromFirestore(),
+          fetchSettingsFromFirestore(),
+        ]);
+
+        if (!isMounted) return;
+
+        rawSetMatches((curr) => {
+          if (JSON.stringify(curr) !== JSON.stringify(remoteMatches)) {
+            return remoteMatches;
+          }
+          return curr;
+        });
+
+        rawSetCommittee((curr) => {
+          if (JSON.stringify(curr) !== JSON.stringify(remoteCommittee)) {
+            return remoteCommittee;
+          }
+          return curr;
+        });
+
+        rawSetActiveMatchId((curr) => (curr !== remoteSettings.activeMatchId ? remoteSettings.activeMatchId : curr));
+        rawSetTeamAdjustments((curr) => {
+          if (JSON.stringify(curr) !== JSON.stringify(remoteSettings.teamAdjustments)) {
+            return remoteSettings.teamAdjustments;
+          }
+          return curr;
+        });
+      } catch (err) {
+        console.error("Failed to sync remote state from Firestore:", err);
+      }
+    };
+
+    void syncRemoteState();
 
     const unsubMatches = subscribeMatches((remoteMatches) => {
       rawSetMatches((curr) => {
@@ -188,12 +228,33 @@ export default function App() {
       });
     });
 
+    const intervalId = window.setInterval(() => {
+      void syncRemoteState();
+    }, 2000);
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void syncRemoteState();
+      }
+    };
+
+    const handleOnline = () => {
+      void syncRemoteState();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("online", handleOnline);
+
     return () => {
+      isMounted = false;
+      window.clearInterval(intervalId);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("online", handleOnline);
       unsubMatches();
       unsubCommittee();
       unsubSettings();
     };
-  }, [isAdmin]);
+  }, []);
 
   const [activeTab, setActiveTab] = useState<"live" | "points" | "owners" | "committee">("live");
   const [showLoginModal, setShowLoginModal] = useState(false);

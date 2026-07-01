@@ -11,6 +11,7 @@ import {
   writeBatch,
   deleteDoc,
   getDocs,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import { Match, CommitteeMember, TeamAdjustment } from "./types";
@@ -137,6 +138,51 @@ export async function initializeDatabaseIfEmpty() {
     console.error("Error initializing Firestore database:", error);
     throw error;
   }
+}
+
+/**
+ * Fetch the latest matches from Firestore.
+ */
+export async function fetchMatchesFromFirestore(): Promise<Match[]> {
+  const snapshot = await getDocs(collection(db, MATCHES_COL));
+  const matches: Match[] = [];
+  snapshot.forEach((docSnap) => {
+    matches.push(docSnap.data() as Match);
+  });
+  matches.sort((a, b) => a.id.localeCompare(b.id));
+  return matches;
+}
+
+/**
+ * Fetch the latest committee members from Firestore.
+ */
+export async function fetchCommitteeFromFirestore(): Promise<CommitteeMember[]> {
+  const snapshot = await getDocs(collection(db, COMMITTEE_COL));
+  const committee: CommitteeMember[] = [];
+  snapshot.forEach((docSnap) => {
+    committee.push(docSnap.data() as CommitteeMember);
+  });
+  committee.sort((a, b) => a.id.localeCompare(b.id));
+  return committee;
+}
+
+/**
+ * Fetch the latest global settings from Firestore.
+ */
+export async function fetchSettingsFromFirestore(): Promise<{ activeMatchId: string; teamAdjustments: TeamAdjustment[] }> {
+  const docSnap = await getDoc(SETTINGS_DOC);
+  if (!docSnap.exists()) {
+    return {
+      activeMatchId: INITIAL_MATCHES[0].id,
+      teamAdjustments: [],
+    };
+  }
+
+  const data = docSnap.data();
+  return {
+    activeMatchId: data.activeMatchId || INITIAL_MATCHES[0].id,
+    teamAdjustments: data.teamAdjustments || [],
+  };
 }
 
 /**
