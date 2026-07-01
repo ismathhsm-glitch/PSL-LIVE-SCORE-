@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Match, InningsState, DismissalType } from "../types";
+import { Match, InningsState, DismissalType, CommitteeMember } from "../types";
 import {
   formatOvers,
   calculateStrikeRate,
@@ -17,9 +17,10 @@ import { downloadMatchReportPDF } from "../utils/pdfReport";
 interface LiveScoreDisplayProps {
   match: Match;
   allMatches?: Match[];
+  committeeMembers?: CommitteeMember[];
 }
 
-export default function LiveScoreDisplay({ match, allMatches = [] }: LiveScoreDisplayProps) {
+export default function LiveScoreDisplay({ match, allMatches = [], committeeMembers = [] }: LiveScoreDisplayProps) {
   // Extract active innings data
   const isFirstInnings = match.currentInnings === 1;
   const inn = isFirstInnings ? match.innings1 : match.innings2;
@@ -182,7 +183,7 @@ export default function LiveScoreDisplay({ match, allMatches = [] }: LiveScoreDi
               </div>
             )}
             <button
-              onClick={() => downloadMatchReportPDF(match, allMatches)}
+              onClick={() => downloadMatchReportPDF(match, allMatches, committeeMembers)}
               className="mt-6 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-400 hover:to-amber-400 text-emerald-950 font-black py-2.5 px-6 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg hover:shadow-yellow-500/10 cursor-pointer active:scale-95"
             >
               <FileDown className="w-4 h-4" />

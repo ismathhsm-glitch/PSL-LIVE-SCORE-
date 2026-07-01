@@ -122,4 +122,6 @@ export interface CommitteeMember {
   photoUrl: string; // base64 or custom preset image
   isOwner?: boolean;
   players?: string[];
+  captainName?: string;
+  captainPhotoUrl?: string;
 }

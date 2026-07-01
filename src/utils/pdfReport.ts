@@ -4,13 +4,17 @@
  */
 
 import { jsPDF } from "jspdf";
-import { Match, InningsState, BatsmanStats, BowlerStats } from "../types";
+import { Match, InningsState, BatsmanStats, BowlerStats, CommitteeMember } from "../types";
 import { formatOvers, calculateStrikeRate, calculateEconomyRate, calculatePointsTable } from "../utils";
 
 /**
  * Generates and downloads a beautifully styled PDF Match Report
  */
-export function downloadMatchReportPDF(match: Match, allMatches: Match[] = []) {
+export function downloadMatchReportPDF(
+  match: Match,
+  allMatches: Match[] = [],
+  committeeMembers: CommitteeMember[] = []
+) {
   const doc = new jsPDF("p", "mm", "a4");
   const pageWidth = 210;
   const pageHeight = 297;
@@ -418,8 +422,98 @@ export function downloadMatchReportPDF(match: Match, allMatches: Match[] = []) {
     doc.text("Innings 2 has not started yet or match was decided in 1st innings.", margin + 10, currentY);
   }
 
-  // Add signature section at the bottom of Page 2
   const sigY = pageHeight - 38;
+
+  // Draw Captains Section
+  const captainsY = sigY - 24; // 24mm above signatures
+  doc.setDrawColor(226, 232, 240);
+  doc.setLineWidth(0.2);
+  doc.line(margin, captainsY, margin + contentWidth, captainsY);
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(15, 23, 42);
+  doc.text("TEAM CAPTAINS", margin, captainsY + 4.5);
+
+  const drawCaptainPlaceholder = (x: number, y: number, w: number, h: number, nameStr: string) => {
+    // Draw colored box
+    doc.setFillColor(30, 64, 175); // Royal Blue
+    doc.roundedRect(x, y, w, h, 2, 2, "F");
+    
+    // Draw captain initial
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    const initial = nameStr.trim().charAt(0).toUpperCase() || "C";
+    doc.text(initial, x + w / 2, y + h / 2 + 3.5, { align: "center" });
+  };
+
+  // Find Team A Captain
+  const teamACard = committeeMembers.find(m => 
+    m.isOwner === true && 
+    (m.role.toLowerCase().includes(match.teamA.toLowerCase()) || 
+     match.teamA.toLowerCase().includes(m.role.replace(/^Owner,\s*/i, "").toLowerCase()))
+  );
+  
+  // Find Team B Captain
+  const teamBCard = committeeMembers.find(m => 
+    m.isOwner === true && 
+    (m.role.toLowerCase().includes(match.teamB.toLowerCase()) || 
+     match.teamB.toLowerCase().includes(m.role.replace(/^Owner,\s*/i, "").toLowerCase()))
+  );
+
+  // Draw Team A Captain on the left
+  const capAName = teamACard?.captainName || "Not Assigned";
+  const capAPhoto = teamACard?.captainPhotoUrl;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text(`${match.teamA} Captain:`, margin + 5, captainsY + 11);
+  doc.setFont("helvetica", "normal");
+  doc.text(capAName, margin + 5, captainsY + 15);
+  
+  // Render Team A Captain photo
+  const photoSize = 12; // 12mm
+  const photoAX = margin + 50;
+  const photoAY = captainsY + 7;
+  if (capAPhoto && capAPhoto.startsWith("data:image/") && capAPhoto.includes(";base64,")) {
+    try {
+      const format = capAPhoto.split(";")[0].split("/")[1].split("+")[0].toUpperCase();
+      doc.addImage(capAPhoto, format === "JPEG" ? "JPEG" : "PNG", photoAX, photoAY, photoSize, photoSize);
+    } catch (e) {
+      console.error(e);
+      drawCaptainPlaceholder(photoAX, photoAY, photoSize, photoSize, capAName);
+    }
+  } else {
+    drawCaptainPlaceholder(photoAX, photoAY, photoSize, photoSize, capAName);
+  }
+
+  // Draw Team B Captain on the right
+  const capBName = teamBCard?.captainName || "Not Assigned";
+  const capBPhoto = teamBCard?.captainPhotoUrl;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text(`${match.teamB} Captain:`, margin + 100, captainsY + 11);
+  doc.setFont("helvetica", "normal");
+  doc.text(capBName, margin + 100, captainsY + 15);
+
+  // Render Team B Captain photo
+  const photoBX = margin + 145;
+  const photoBY = captainsY + 7;
+  if (capBPhoto && capBPhoto.startsWith("data:image/") && capBPhoto.includes(";base64,")) {
+    try {
+      const format = capBPhoto.split(";")[0].split("/")[1].split("+")[0].toUpperCase();
+      doc.addImage(capBPhoto, format === "JPEG" ? "JPEG" : "PNG", photoBX, photoBY, photoSize, photoSize);
+    } catch (e) {
+      console.error(e);
+      drawCaptainPlaceholder(photoBX, photoBY, photoSize, photoSize, capBName);
+    }
+  } else {
+    drawCaptainPlaceholder(photoBX, photoBY, photoSize, photoSize, capBName);
+  }
+
+  // Add signature section at the bottom of Page 2
   doc.setDrawColor(220, 220, 220);
   doc.line(margin + 5, sigY, margin + 55, sigY);
   doc.line(pageWidth - margin - 55, sigY, pageWidth - margin - 5, sigY);

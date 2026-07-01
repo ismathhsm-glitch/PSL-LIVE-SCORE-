@@ -1,10 +1,10 @@
 {
-  "projectId": "windy-mercury-nk91c",
-  "appId": "1:754730495501:web:b7dce9b076ac4e0b106f44",
-  "apiKey": "AIzaSyDyA11ioMdh5nMjuFlb5n6ZLCOPlsq4IVI",
-  "authDomain": "windy-mercury-nk91c.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-psl2026livescori-fd7e2ab0-345d-4f71-8dc4-409cb5287ac6",
-  "storageBucket": "windy-mercury-nk91c.firebasestorage.app",
-  "messagingSenderId": "754730495501",
-  "measurementId": ""
+  "apiKey": "AIzaSyD02lE5LpjjMIW2qvhHuTITKAmfEewHO60",
+  "authDomain": "psl-2026-live-scoring.firebaseapp.com",
+  "projectId": "psl-2026-live-scoring",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "psl-2026-live-scoring.firebasestorage.app",
+  "messagingSenderId": "748506738776",
+  "appId": "1:748506738776:web:5a262f6da06a07cd769a2d",
+  "measurementId": "G-4XEZ9T3KC1"
 }

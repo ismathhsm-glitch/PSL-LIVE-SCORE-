@@ -1047,7 +1047,7 @@ export default function App() {
                   : "text-emerald-400 hover:text-white"
               }`}
             >
-              Owners
+              Teams
             </button>
             <button
               onClick={() => setActiveTab("committee")}
@@ -1124,7 +1124,7 @@ export default function App() {
                 : "border-transparent text-emerald-500"
             }`}
           >
-            Owners
+            Teams
           </button>
           <button
             onClick={() => setActiveTab("committee")}
@@ -1211,13 +1211,13 @@ export default function App() {
                       👁️ Public Viewer Layout Preview
                     </span>
                   </div>
-                  <LiveScoreDisplay match={activeMatch} allMatches={matches} />
+                  <LiveScoreDisplay match={activeMatch} allMatches={matches} committeeMembers={committee} />
                 </div>
               </div>
             ) : (
               // Simple viewer display (read-only)
               <div className="max-w-4xl mx-auto">
-                <LiveScoreDisplay match={activeMatch} allMatches={matches} />
+                <LiveScoreDisplay match={activeMatch} allMatches={matches} committeeMembers={committee} />
               </div>
             )}
 
