@@ -1,0 +1,6 @@
+{
+  "name": "PSL 2026 Live Scoring",
+  "description": "A live cricket scoring web application for the PSL 2026 tournament, with custom scoring controls, point tables, fixtures, and admin tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
