@@ -367,14 +367,6 @@ export default function CommitteeSection({
       {/* --- SECTION 1: TEAMS --- */}
       {(!mode || mode === "owners") && (
         <div id="owners-section-container" className="space-y-6">
-          <div className="flex items-center gap-2">
-            <Crown className="w-5 h-5 text-yellow-500" />
-            <h3 className="text-lg font-display font-black text-white uppercase tracking-wider">
-              Tournament Teams
-            </h3>
-            <span className="h-px flex-1 bg-gradient-to-r from-emerald-800/40 via-emerald-800/10 to-transparent ml-3" />
-          </div>
-
           {owners.length === 0 ? (
             <p className="text-sm text-emerald-600 italic">No teams registered yet.</p>
           ) : (
@@ -533,7 +525,7 @@ function MemberCard({
           <div className="flex gap-6 items-start justify-center mb-5 w-full">
             {/* Owner Section */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl border-2 border-emerald-800/80 overflow-hidden bg-[#05140b] shadow-md group-hover:border-yellow-500/40 transition-all duration-300 relative">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-xl border-2 border-emerald-800/80 overflow-hidden bg-[#05140b] shadow-md group-hover:border-yellow-500/40 transition-all duration-300 relative">
                 <img
                   src={member.photoUrl}
                   alt={member.name}
@@ -542,14 +534,14 @@ function MemberCard({
                 />
               </div>
               <span className="text-[9px] text-emerald-400 font-bold uppercase tracking-wider mt-2">Owner</span>
-              <span className="text-xs text-white font-semibold mt-0.5 text-center leading-tight truncate max-w-[100px] block font-sans" title={member.name}>
+              <span className="text-xs text-white font-semibold mt-0.5 text-center leading-tight truncate max-w-[120px] block font-sans" title={member.name}>
                 {member.name}
               </span>
             </div>
 
             {/* Captain Section */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl border-2 border-emerald-800/80 overflow-hidden bg-[#05140b] shadow-md group-hover:border-yellow-500/40 transition-all duration-300 relative">
+              <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-xl border-2 border-emerald-800/80 overflow-hidden bg-[#05140b] shadow-md group-hover:border-yellow-500/40 transition-all duration-300 relative">
                 <img
                   src={member.captainPhotoUrl || defaultCaptainPhoto}
                   alt={member.captainName || "Captain"}
@@ -558,7 +550,7 @@ function MemberCard({
                 />
               </div>
               <span className="text-[9px] text-yellow-500 font-bold uppercase tracking-wider mt-2">Captain</span>
-              <span className="text-xs text-white font-semibold mt-0.5 text-center leading-tight truncate max-w-[100px] block font-sans" title={member.captainName || "Not Set"}>
+              <span className="text-xs text-white font-semibold mt-0.5 text-center leading-tight truncate max-w-[120px] block font-sans" title={member.captainName || "Not Set"}>
                 {member.captainName || "Not Set"}
               </span>
             </div>
@@ -655,7 +647,7 @@ function MemberCard({
           {players.length === 0 ? (
             <p className="text-[11px] text-emerald-600/70 italic">No players added yet.</p>
           ) : (
-            <ul className="space-y-1.5 max-h-40 overflow-y-auto pr-1 scrollbar-thin">
+            <ul className="space-y-1.5 max-h-48 overflow-y-auto pr-1 scrollbar-thin">
               {players.map((player, idx) => (
                 <li
                   key={idx}
