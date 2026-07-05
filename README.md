@@ -176,9 +176,8 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 **Hasim Ismath**
-
-- GitHub: https://github.com/yourusername
-- LinkedIn: https://linkedin.com/in/yourprofile
+ 
+- LinkedIn : linkedin.com/in/ismath-hasim-1129b4301/
 
 ---
 
