@@ -8,7 +8,7 @@ A modern real-time cricket live scoring web application built using React, TypeS
 
 > Add your project screenshots here.
 
-| Home | Live Match | Admin Dashboard |
+| TEAMS | Live Match | Admin Dashboard |
 |------|------------|-----------------|
 | ![Home](screenshots/home.png) | ![Live](screenshots/live.png) | ![Admin](screenshots/admin.png) |
 
