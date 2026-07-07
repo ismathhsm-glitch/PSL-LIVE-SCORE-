@@ -222,7 +222,7 @@ export default function AdminPanel({
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-emerald-900/40 pb-4">
         <div className="flex items-center gap-2">
           <Settings className="w-6 h-6 text-yellow-500" />
-          <h2 className="text-2xl font-display font-black text-white">Ismath Admin Controller</h2>
+          <h2 className="text-2xl font-display font-black text-white">Arsaam Admin Controller</h2>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">

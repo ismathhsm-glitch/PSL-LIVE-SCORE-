@@ -101,10 +101,10 @@ export const INITIAL_COMMITTEE: CommitteeMember[] = [
   // Default Committee Members
   {
     id: "member-1",
-    name: "Ismath",
+    name: "Arsaam",
     role: "Tournament Director & Chief Scorer",
     isOwner: false,
-    photoUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2314532d'/><stop offset='100%' stop-color='%23022c22'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><circle cx='50' cy='35' r='18' fill='%23facc15'/><path d='M20,80 C20,60 30,55 50,55 C70,55 80,60 80,80 Z' fill='%23eab308'/><text x='50' y='92' font-family='sans-serif' font-size='10' font-weight='bold' fill='%23ffffff' text-anchor='middle'>ISMATH</text></svg>"
+    photoUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%2314532d'/><stop offset='100%' stop-color='%23022c22'/></linearGradient></defs><rect width='100' height='100' fill='url(%23g)'/><circle cx='50' cy='35' r='18' fill='%23facc15'/><path d='M20,80 C20,60 30,55 50,55 C70,55 80,60 80,80 Z' fill='%23eab308'/><text x='50' y='92' font-family='sans-serif' font-size='10' font-weight='bold' fill='%23ffffff' text-anchor='middle'>ARSAAM</text></svg>"
   },
   {
     id: "member-2",

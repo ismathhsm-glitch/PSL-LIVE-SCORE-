@@ -1073,7 +1073,7 @@ export default function App() {
                 className="text-[10px] text-emerald-500/80 hover:text-yellow-400 font-mono tracking-widest uppercase cursor-pointer transition-colors"
                 title="Admin Authentication Area"
               >
-                Ismath Admin
+                Arsaam Admin
               </p>
             </div>
           </div>
@@ -1138,7 +1138,7 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <span className="text-xs text-yellow-400 font-semibold uppercase tracking-wider bg-yellow-500/10 border border-yellow-500/20 py-1.5 px-3 rounded-xl flex items-center gap-1.5 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse"></span>
-                  Ismath (Admin)
+                  Arsaam (Admin)
                 </span>
                 <button
                   onClick={() => {

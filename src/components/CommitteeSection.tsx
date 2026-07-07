@@ -251,7 +251,7 @@ export default function CommitteeSection({
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder={mode === "owners" ? "e.g. Fawad Rana" : "e.g. Ismath"}
+                    placeholder={mode === "owners" ? "e.g. Fawad Rana" : "e.g. Arsaam"}
                     className="w-full bg-[#05140b] border border-emerald-800 rounded-xl py-2 px-3 text-white placeholder-emerald-700/60 focus:outline-none focus:ring-1 focus:ring-yellow-500 focus:border-yellow-500 text-sm"
                     required
                   />

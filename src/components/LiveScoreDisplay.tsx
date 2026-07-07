@@ -32,7 +32,7 @@ export default function LiveScoreDisplay({ match, allMatches = [], committeeMemb
         <AlertCircle className="w-12 h-12 text-yellow-500 mx-auto mb-3 animate-bounce" />
         <h3 className="text-lg font-display font-bold text-white mb-1">Match Scoring Not Started</h3>
         <p className="text-emerald-400/70 text-sm max-w-sm mx-auto">
-          The admin (Ismath) hasn't initialized the scoring for this match yet. Check back once the match begins!
+          The admin (Arsaam) hasn't initialized the scoring for this match yet. Check back once the match begins!
         </p>
       </div>
     );

@@ -19,7 +19,7 @@ export default function AdminLogin({ onLoginSuccess, onClose }: AdminLoginProps)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.trim().toLowerCase() === "ismath" && password === "ismath2026") {
+    if (username.trim().toLowerCase() === "arsaam" && password === "arsaam2026") {
       onLoginSuccess();
       setError("");
     } else {
@@ -55,7 +55,7 @@ export default function AdminLogin({ onLoginSuccess, onClose }: AdminLoginProps)
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="e.g. Ismath"
+              placeholder="e.g. Arsaam"
               className="w-full bg-[#05140b] border border-emerald-800/80 rounded-xl py-2.5 pl-10 pr-4 text-white placeholder-emerald-700/60 focus:outline-none focus:ring-2 focus:ring-yellow-500/50 focus:border-yellow-500 transition-all text-sm"
               required
             />
@@ -121,7 +121,7 @@ export default function AdminLogin({ onLoginSuccess, onClose }: AdminLoginProps)
       <div id="credentials-helper" className="mt-6 border-t border-emerald-900/40 pt-4 text-center">
         <div className="inline-block bg-yellow-500/5 border border-yellow-500/10 rounded-lg p-2.5 text-[11px] text-yellow-400/80 max-w-xs">
           <p className="font-semibold uppercase tracking-wider mb-0.5">Scoring Credentials</p>
-          <p>Username: <span className="text-white font-mono font-bold">Ismath</span></p>
+          <p>Username: <span className="text-white font-mono font-bold">Arsaam</span></p>
           <p>Password: <span className="text-white font-mono font-bold">******</span></p>
         </div>
       </div>
