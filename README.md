@@ -27,7 +27,7 @@ A modern real-time cricket live scoring web application built using React, TypeS
 - ✅ Committee Members
 - ✅ Team Owners
 - ✅ Batting & Bowling Statistics
-- ✅ Match Summary
+- ✅ Match Summar
 - ✅ Responsive Design
 - ✅ Mobile Friendly
 - ✅ Fast Performance
