@@ -10,7 +10,7 @@ A modern real-time cricket live scoring web application built using React, TypeS
 
 | TEAMS | Live Match | Admin Dashboard |
 |------|------------|-----------------|
-| ![Home](screenshots/home.png) | ![Live](screenshots/Live.png) | ![Admin](screenshots/Admin.png) |
+| ![Home](screenshots/home.png) | ![Live](screenshots/live.png) | ![Admin](screenshots/Admin.png) |
 
 ---
 
